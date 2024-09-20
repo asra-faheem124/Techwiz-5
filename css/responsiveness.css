@@ -1,0 +1,89 @@
+@media(max-width:1440px) {
+     .test-img{
+        margin-left: 380px;
+     }
+}
+@media(max-width:1200px) {
+    .test-img{
+        margin-left: 263px;
+     }
+     .review-btn {
+        margin-left: 430px;
+      }
+}
+@media(max-width:991px){
+    .login {
+    margin-left: 130px;
+    margin-top: 15px;
+}
+.review-btn {
+    margin-left: 400px;
+  }
+}
+@media(max-width:768px) {
+    .test-img{
+        margin-left: 184px;
+     }
+     .review-btn {
+        margin-left: 291px;
+      }
+}
+@media(max-width: 526px) {
+    .test-img{
+        margin-left: 91px;
+     }
+     .review-btn {
+        margin-left: 158px;
+      }
+      .aviation-head {
+        font-size: 1.5rem;
+      }
+}
+
+
+@media(max-width: 425px) {
+    .card{
+        flex-direction: column; 
+        align-items: center; 
+      }
+      .card-img-top {
+        width: 270px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 5px 5px 5px rgb(213, 211, 211);
+    }
+    .test-img{
+        margin-left: 69px;
+     }
+     .review-btn {
+        margin-left: 118px;
+      }
+    
+}
+@media(max-width: 375px) {
+    .test-img{
+        margin-left: 49px;
+     }
+     .welcome {
+        margin-top: 40px;
+    }
+    .review-btn {
+        margin-left: 90px;
+      }
+}
+@media(max-width: 320px) {
+    .test-img{
+        margin-left: 24px;
+     }
+     .card{
+         margin-left: 20px;
+     }
+     .review-btn {
+        margin-left: 65px;
+      }
+      .test-body{
+        margin-left: 55px;
+      }
+}
+
