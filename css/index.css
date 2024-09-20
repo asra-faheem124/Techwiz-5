@@ -41,10 +41,10 @@ body {
     
 }
 
-.fixed-top {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+.sticky-top {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 /* banner */
 .main_banner {
@@ -64,10 +64,11 @@ body {
 }
 
 .welcome {
-    margin-top: 60px;
+    /* margin-top: 60px; */
     color: white;
     font-weight: bolder;
     font-size: 5vmax;
+    text-transform: capitalize;
 }
 .slogan{
     color: white;
@@ -87,8 +88,10 @@ body {
     border: 0;
 }
 .card-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+    /* display: grid;
+    gap: 20px; */
+    /* grid-template-columns: repeat(auto-fill, minmax(400px,1fr)); */
+    /* grid-template-columns: repeat(3, 1fr); */
 }
 /* book form */
 .book_container {

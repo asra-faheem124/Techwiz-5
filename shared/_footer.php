@@ -52,6 +52,13 @@
       </div>
   </footer>
        <!-- footer end -->
+                <!-- script for animation -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        offset: 2,
+      });
+    </script>
 
        <!-- bootstrap -->
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

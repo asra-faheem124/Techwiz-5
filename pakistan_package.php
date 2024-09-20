@@ -58,34 +58,20 @@
     <div class="container">
         <!-- <h2>Tour OverView</h2> -->
         <p class="text-center">Tour Package: Northern Pakistan Adventure (7 Days, 6 Nights)</p>
-
+<?php
+$conn = mysqli_connect("localhost", "root", "","techwiz")
+or die("Connection failed");
+$sql = "SELECT * FROM pak_package";
+    $run = mysqli_query($conn,$sql);
+    while($data = mysqli_fetch_assoc($run))
+    {
+?>
         <div class="overview-grid">
             <div class="overview-item" style="height: 150px">
-                <img src="images/isl.jpg" height="200" class="img-fluid" alt="">
-                <h3>Islamabad</h3>
+            <img src="../Admin_Panel/images/<?php echo $data['pak_image']?>"  class="card-img-top">
+            <h3><?php echo $data['pak_name']?></h3>
             </div>
-
-            <div class="overview-item h-50">
-                <img src="images/skardu.jpg" height="200" class="img-fluid" alt="">
-                <h3>Naran</h3>
-            </div>
-
-            <div class="overview-item">
-                <img src="images/lahore.jpg" height="200" class="img-fluid" alt="">
-                <h3>Saiful Mulook</h3>
-            </div>
-            <div class="overview-item h-50">
-                <img src="images/shogran.jpg" height="200" class="img-fluid" alt="">
-                <h3>Shogran</h3>
-            </div>
-            <div class="overview-item h-50">
-                <img src="images/nathia.jpg" height="200" class="img-fluid" alt="">
-                <h3>Nathiagali</h3>
-            </div>
-            <div class="overview-item h-50">
-                <img src="images/murree.jpg" height="200" class="img-fluid" alt="">
-                <h3>Murree</h3>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>
@@ -235,6 +221,60 @@
 <section class="tour-details">
     <div class="container-fluid">
         <h2>Avail this amazing trip before it expires</h2>
-<a href=""><button class="btn btn-primary">Book Now!</button></a>    </div>
+<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal1"><button class="btn btn-primary">Book Now!</button></a>    </div>
 </section>
+<!-- modal Reviews -->
+<div class="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabe" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+      <h1 class="fs-3">Book Now</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex">
+      <div class="container">
+  <div class="form">
+    <form action="review_trip.php" method="post">
+    <div class="row">
+      <div class="col-lg-6 my-3">
+      <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="availbook_name" id="name" class="form-control" placeholder="Enter your name">
+        </div>
+      </div>
+      <div class="col-lg-6 my-3">
+      <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="availbook_email" id="name" class="form-control" placeholder="Enter your email">
+        </div>
+      </div>
+      <div class="col-lg-6 my-3">
+      <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="availbook_phone" id="name" class="form-control" placeholder="Enter your phone">
+        </div>
+      </div>
+      <div class="col-lg-6 my-3">
+      <div class="form-group">
+            <label>Country Name</label>
+            <input type="text" name="availbook_country" id="name" class="form-control" placeholder="Enter country name you're booking for">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="form-group">
+          <label for="">Additional Message</label>
+        <textarea name="availbook_addi" id="" class="form-control" placeholder="Enter additional instructions"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="submit" name="review_submit" value="Send"
+  class="btn btn-primary">
+  </form>
+</div>
+   
+</div>
+    </div>
+  </div>
+</div>
 <?php include 'shared/_footer.php'?>

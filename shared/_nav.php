@@ -1,5 +1,5 @@
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg w-100 fixed-top">
+    <nav class="navbar navbar-expand-lg w-100 sticky-top bg-white">
       <div class="container mt-2">
         <!-- Logo -->
         <a class="navbar-brand ms-3" href="#">
@@ -69,8 +69,15 @@
                 </ul>
               </li>
             </ul>
-            <a href=""><button class="login">Login</button></a>
-            <a href=""><button class="login">Signup</button></a>
+            <?php 
+if(!isset($_SESSION['sign_name'])) {
+?>
+            <a href="login.php"><button class="login">Login</button></a>
+            <a href="signup.php"><button class="login">Signup</button></a>
+            <?php } else{?>
+              <a href="user_profile.php" class="text-decoration-none text-dark mt-1"><i class="fa-solid fa-user"></i></a>
+              <a href="logout.php" class="text-decoration-none ms-4 text-dark mt-1">Logout</a>
+              <?php } ?>
           </div>
         </div>
       </div>

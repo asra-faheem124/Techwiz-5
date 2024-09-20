@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,13 +32,21 @@
     />
   </head>
   <body>
-      <?php include 'shared/_nav.php'?>
+      <?php include 'shared/_nav.php';
+      ?>
 <!-- banner start -->
 <div class="container-fluid main_banner img-fluid">
     <div class="row">
-        <div class="col-lg-12 text-center" style="margin-top: 200px;">
+        <div class="col-lg-12 text-center" style="margin-top: 100px;">
+<?php 
+if(!isset($_SESSION['sign_name'])) {
+?>
             <h1 class="welcome" data-aos="zoom-in"
-            data-aos-duration="1200">WELCOME USERNAME</h1>
+            data-aos-duration="1200">WELCOME</h1>
+            <?php } else{?>
+              <h1 class="welcome" data-aos="zoom-in"
+              data-aos-duration="1200">WELCOME <?php echo "<span class='welcome' style='text-transform: capitalize;'>".$_SESSION['sign_name']."</span>"?></h1>
+              <?php } ?>
             <h3 class="slogan" data-aos="zoom-in"
             data-aos-duration="1200">Dream, Discover, Explore: Your Trip Starts Here.</h3>
         </div>
@@ -49,36 +59,27 @@
 
     <h1 class="text-center mt-5" data-aos="fade-up" data-aos-duration="1200">Upcoming Tours</h1>
      <div class="card-container mt-5">
+     <?php
+    $conn = mysqli_connect("localhost", "root", "","techwiz")
+    or die("Connection failed");
+    $sql1 = "SELECT * FROM upcoming_tours";
+    $run1 = mysqli_query($conn,$sql1);
+    while($data = mysqli_fetch_assoc($run1))
+    {
+    ?>
+      <div class="row">
     <div class="card" style="width: 18rem;" data-aos="fade-up"
     data-aos-delay="200" data-aos-duration="1200">
-  <img src="images/card-1.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Pakistan</h5>
-    <p class="card-text">A Nature's Love Paradise</p>
-    <a href="pakistan_package.php" class="btn btn-primary">Explore  More</a>
-  </div>
-</div>
 
-<div class="card" style="width: 18rem;" data-aos="fade-up"
-data-aos-delay="200" data-aos-duration="1200">
-  <img src="images/italy.webp" class="card-img-top" alt="...">
+    <img src="Admin_Panel/<?php  echo $data['tour_image']   ?>" class="card-img-top">
   <div class="card-body">
-    <h5 class="card-title">Italy</h5>
-    <p class="card-text">Explore Italy's Hidden Coastlines</p>
-    <a href="#" class="btn btn-primary">Explore  More</a>
+    <h5 class="card-title"><?php echo $data['tour_name']?></h5>
+    <p class="card-text"><?php echo $data['tour_desc']?></p>
+    <a href="pakistan_package.php" class="btn btn-primary">Explore More</a>
+  </div>
   </div>
 </div>
-
-<div class="card" style="width: 18rem;" data-aos="fade-up"
-data-aos-delay="200" data-aos-duration="1200">
-  <img src="images/India.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">India</h5>
-    <p class="card-text">Discover the Land of Diversity</p>
-    <a href="#" class="btn btn-primary">Explore  More</a>
-  </div>
-</div>
-</div>
+<?php } ?>
 </div>
 
 <!-- personal tour start -->
@@ -166,20 +167,19 @@ data-aos-delay="200" data-aos-duration="1200">
       <div class="modal-body d-flex">
       <div class="container py-3 book_container" data-aos="fade-up"
       data-aos-duration="1200">
-      <form>
-    <div class="row align-items-center">
+      <form action="book_trip.php" method="post">
+    <div class="row">
         <div class="col-lg-6 mt-3">
         <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" name="book_name" id="name" class="form-control" placeholder="Enter your name">
+            <label>Trip Name</label>
+            <input type="text" name="trip_name" id="name" class="form-control" placeholder="Enter trip name">
          
         </div>
-        <p id="nameError"></p>
         </div>
         <div class="col-lg-6 mt-3">
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="book_email" id="email" class="form-control" placeholder="Enter your email">
+            <label>Destination</label>
+            <input type="email" name="trip_destination" id="email" class="form-control" placeholder="Enter destination">
             <p id="emailError"></p>
         </div>
         </div>
@@ -187,53 +187,64 @@ data-aos-delay="200" data-aos-duration="1200">
         <div class="row">
         <div class="col-lg-6 mt-3">
         <div class="form-group">
-            <label>Phone</label>
-            <input type="text" name="book_phone" id="number" class="form-control" placeholder="Enter your number">
-            <p id="numberError"></p>
-        </div>
-        </div>
-        <div class="col-lg-6 mt-3">
-        <div class="form-group">
-            <label>Address</label>
-            <input type="text" name="book_address" id="address" class="form-control" placeholder="Enter your address">
-            <p id="addressError"></p>
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-lg-6 mt-3">
-        <div class="form-group">
-            <label>Where To</label>
-            <input type="text" name="book_where" id="visit" class="form-control" placeholder="Place you want to visit">
-            <p id="visitError"></p>
-        </div>
-        </div>
-        <div class="col-lg-6 mt-3">
-        <div class="form-group">
-            <label>Number of guests</label>
-            <input type="text" name="book_guests" id="guest" class="form-control" placeholder="Number of Guests">
-            <p id="guestError"></p>
-        </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-lg-6 mt-3">
-        <div class="form-group">
-            <label>Arrivals</label>
-            <input type="date" name="book_arrivals" id="date" class="form-control">
+            <label>Trip Start Date</label>
+            <input type="date" name="trip_start_date" id="date" class="form-control">
             <p id="dateErrors"></p>
 
         </div>
         </div>
         <div class="col-lg-6 mt-3">
         <div class="form-group">
-            <label>Leaving</label>
-            <input type="date" name="book_leaving" id="leaving" class="form-control">
+            <label>Trip End Date</label>
+            <input type="date" name="trip_end_date" id="leaving" class="form-control">
             <p id="leavingErrors"></p>
         </div>
         </div>
+</div>
+        <div class="row">
+        <div class="col-lg-6 mt-3">
+        <div class="form-group">
+            <label>Total Budget</label>
+            <input type="text" name="trip_budget" id="number" class="form-control" placeholder="Enter total budget">
+            <p id="numberError"></p>
         </div>
-        <input type='submit' value="Book Now" name="book_submit" class="btn btn-primary mt-3" id="tripBookBtn">
+        </div>
+        <div class="col-lg-6 mt-3">
+        <div class="form-group">
+            <label>Accomodation Expense</label>
+            <input type="text" name="expense_acc" id="number" class="form-control" placeholder="Enter accomodation expense">
+            <p id="numberError"></p>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-6 mt-3">
+        <div class="form-group">
+            <label>Food Expense</label>
+            <input type="text" name="expense_food" id="visit" class="form-control" placeholder="Enter food expense">
+            <p id="visitError"></p>
+        </div>
+        </div>
+        <div class="col-lg-6 mt-3">
+        <div class="form-group">
+            <label>Transport Expense</label>
+            <input type="text" name="expense_transport" id="address" class="form-control" placeholder="Enter transport expense">
+            <p id="addressError"></p>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-12 mt-3">
+        <div class="form-group">
+            <label>Notes</label>
+            <textarea name="trip_notes" id="guest" rows="4" cols="50" class="form-control" placeholder="Additional notes..."></textarea>
+            <p id="guestError"></p>
+        </div>
+        </div>
+        </div>
+
+        <input type="submit" name="book_submit" value="Book Trip"
+        class="btn btn-primary">
     </form> 
     </div>
 </div>
@@ -252,6 +263,7 @@ data-aos-delay="200" data-aos-duration="1200">
       <div class="modal-body d-flex">
       <div class="container">
   <div class="form">
+    <form action="review_trip.php" method="post">
     <div class="row">
       <div class="col-lg-6 my-3">
       <div class="form-group">
@@ -268,29 +280,20 @@ data-aos-delay="200" data-aos-duration="1200">
       <div class="row my-3">
         <div class="form-group">
           <label for="">Feedback</label>
-        <textarea name="review_area" id="" class="form-control">Send us your feedback</textarea>
+        <textarea name="review_area" id="" class="form-control" placeholder="Enter your review"></textarea>
         </div>
       </div>
     </div>
   </div>
-  <input type='submit' value="Send Now" name="review_submit" class="btn btn-primary mt-3" id="tripBookBtn">
-
+  <input type="submit" name="review_submit" value="Send"
+  class="btn btn-primary">
+  </form>
 </div>
    
 </div>
     </div>
   </div>
 </div>
-
-
-
-  <!-- script for animation -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        offset: 2,
-      });
-    </script>
 
 <?php include 'shared/_footer.php'?>
 
